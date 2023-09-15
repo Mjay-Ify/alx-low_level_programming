@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 /**
- * main - main function
+ * main - print 1 to 100 and fizzbuzz
  *
  * Return: 0
  */
