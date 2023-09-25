@@ -1,20 +1,36 @@
 #include "main.h"
 
 /**
- * _strcmp - Compare two strings
- * @s1: string
- * @s2: string
- * Return: negative int if s1 < s2, 0 if matching, and positive int if s1 > s2
+ * _strspn - search a string for a set of bytes
+ * @s: char string array
+ * @accept: char array to check bytes with
+ * Return: Number of bytes in the intial segment of `s`
  */
 
-int _strcmp(char *s1, char *s2)
+unsigned int _strspn(char *s, char *accept)
 {
 	int i;
+	int j;
+	int c;
 
-	for (i = 0; s1[i] != '\0' || s2[i] != '\0'; i++)
+	i = 0;
+	c = 0;
+
+	while (s[i] != '\0')
 	{
-		if (s1[i] != s2[i])
-			return (s1[i] - s2[i]);
+		j = 0;
+		while (accept[j] != '\0')
+		{
+			if (s[i] == accept[j])
+			{
+				c++;
+				break;
+			}
+			j++;
+		}
+		if (accept[j] == '\0')
+			break;
+		i++;
 	}
-	return (0);
+	return (c);
 }
