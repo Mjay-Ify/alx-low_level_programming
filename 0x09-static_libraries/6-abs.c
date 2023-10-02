@@ -1,7 +1,6 @@
 #include "main.h"
 /**
- * _abs - Computes the absolute value
- * of an integer.
+ * _abs - Computes the absolute integer
  *
  * @n: number to be printed out
  *
@@ -9,12 +8,15 @@
  */
 int _abs(int n)
 {
+	int result;
+
 	if (n >= 0)
 	{
-		return (n);
+		result = n;
 	}
-	else
+	else if (n < 0)
 	{
-		return (n * -1);
+		result = -n;
 	}
+	return (result);
 }
