@@ -3,18 +3,18 @@
  * _abs - Computes the absolute value
  * of an integer.
  *
- * @i: input number as an integer.
+ * @n: number to be printed out
  *
- * Return: absolute value
+ * Return: returns the result of n
  */
-int _abs(int i)
+int _abs(int n)
 {
-	if (i >= 0)
+	if (n >= 0)
 	{
-		return (i);
+		return (n);
 	}
 	else
 	{
-		return (i * -1);
+		return (n * -1);
 	}
 }
