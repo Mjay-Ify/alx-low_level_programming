@@ -2,47 +2,53 @@
 #include <stdlib.h>
 
 /**
- * new_dog - initilize new dog structure
- * @name: Name of dog
- * @age: Age of dog
- * @owner: Ownerof the dog
- * Return: returns a pointer else NULL
+ * new_dog - creates a new dog.
+ * @name: name of the dog.
+ * @age: age of the dog.
+ * @owner: owner of the dog.
+ *
+ * Return: struct dog.
+ * if fails, returns NULL.
  */
 dog_t *new_dog(char *name, float age, char *owner)
 {
-	dog_t *kat_dog;
-	char *robname, *robowner;
-	int l_name = 0, l_owner = 0, j;
+	dog_t *p_dog;
+	int i, lname, lowner;
 
-	if (name == NULL || owner == NULL)
+	p_dog = malloc(sizeof(*p_dog));
+	if (p_dog == NULL || !(name) || !(owner))
+	{
+		free(p_dog);
 		return (NULL);
+	}
 
-	while (name[l_name])
-		l_name++;
-	while (owner[l_owner])
-		l_owner++;
+	for (lname = 0; name[lname]; lname++)
+		;
 
-	kat_dog = malloc(sizeof(dog_t));
-	if (kat_dog == NULL)
+	for (lowner = 0; owner[lowner]; lowner++)
+		;
+
+	p_dog->name = malloc(lname + 1);
+	p_dog->owner = malloc(lowner + 1);
+
+	if (!(p_dog->name) || !(p_dog->owner))
+	{
+		free(p_dog->owner);
+		free(p_dog->name);
+		free(p_dog);
 		return (NULL);
+	}
 
-	robname = malloc(l_name + 1);
-	if (robname == NULL)
-		return (NULL);
-	for (j = 0; name[j]; j++)
-		robname[j] = name[j];
-	robname[j] = '\0';
+	for (i = 0; i < lname; i++)
+		p_dog->name[i] = name[i];
+	p_dog->name[i] = '\0';
 
-	robowner = malloc(l_owner + 1);
-	if (robowner == NULL)
-		return (NULL);
-	for (j = 0; owner[j]; j++)
-		robowner[j] = owner[j];
-	robowner[j] = '\0';
+	p_dog->age = age;
 
-	kat_dog->name = robname;
-	kat_dog->age = age;
-	kat_dog->owner = robowner;
-	return (kat_dog);
+	for (i = 0; i < lowner; i++)
+		p_dog->owner[i] = owner[i];
+	p_dog->owner[i] = '\0';
+
+	return (p_dog);
 }
 
