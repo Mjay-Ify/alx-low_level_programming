@@ -1,49 +1,51 @@
-#include "variadic_functions.h"
-#include <stdarg.h>
 #include <stdio.h>
+#include <stdlib.h>
+#include <stdarg.h>
 
 /**
- * print_all - Prints anything based on the format.
- * @format: A list of types of arguments to be printed.
- * c: char
- * i: integer
- * f: float
- * s: char * (if NULL, print (nil) instead)
- */
+  *print_all -A Function that can print anything.
+  *@format: Arguments passed to function.
+  *
+  *Return: Nothing
+  */
 void print_all(const char * const format, ...)
 {
+	unsigned int j;
 	va_list args;
-	int i = 0;
-	char *separator = "";
+	char *s, *separator;
 
 	va_start(args, format);
 
-	while (format && format[i])
-	{
-		if (format[i] == 'c')
-		{
-			putchar(va_arg(args, int));
-		}
-		else if (format[i] == 'i')
-		{
-			printf("%s%d", separator, va_arg(args, int));
-		}
-		else if (format[i] == 'f')
-		{
-			printf("%s%f", separator, va_arg(args, double));
-		}
-		else if (format[i] == 's')
-		{
-			char *str = va_arg(args, char *);
+	separator = "";
 
-			if (str == NULL)
-				printf("%s(nil)", separator);
-			else
-				printf("%s%s", separator, str);
+	j = 0;
+	while (format && format[j])
+	{
+		switch (format[j])
+		{
+			case 'c':
+				printf("%s%c", separator,  va_arg(args, int));
+				break;
+			case 'i':
+				printf("%s%d", separator, va_arg(args, int));
+				break;
+			case 'f':
+				printf("%s%f", separator, va_arg(args, double));
+				break;
+			case 's':
+				s = va_arg(args, char *);
+				if (s == NULL)
+					s = "(nil)";
+				printf("%s%s", separator, s);
+				break;
+			default:
+				j++;
+				continue;
 		}
 		separator = ", ";
-		i++;
+		j++;
 	}
-	va_end(args);
+
 	printf("\n");
+	va_end(args);
 }
