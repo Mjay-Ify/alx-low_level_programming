@@ -1,23 +1,21 @@
-#include <stdio.h>
 #include "main.h"
 
 /**
- * main - check the code for ALX School students.
- *
- * Return: Always 0.
+ * get_bit - A function that gets a bit at index
+ * @n: The number to get bit from
+ * @index: The index where the bit get at
+ * Return: The value of the bit or -1 if an error occured
  */
-int main(void)
+int get_bit(unsigned long int n, unsigned int index)
 {
-  unsigned long int n;
+	unsigned long int max = 0x01;
 
-  n = 1024;
-  set_bit(&n, 5);
-  printf("%lu\n", n);
-  n = 0;
-  set_bit(&n, 10);
-  printf("%lu\n", n);
-  n = 98;
-  set_bit(&n, 0);
-  printf("%lu\n", n);
-  return (0);
+	max <<= index;
+	if (max == 0)
+		return (-1);
+
+	if ((n & max))
+		return (1);
+	else
+		return (0);
 }
